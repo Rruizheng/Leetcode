@@ -1,0 +1,39 @@
+var findMedianSortedArrays = function(nums1, nums2) {
+    var num=[];
+    var max = [];
+    var min = [];
+    num.length = nums1.length + nums2.length;
+    if(nums1.length>nums2.length){
+        max = nums1;
+        min = nums2;
+    }else{
+        max = nums2;
+        min = nums1;
+    }
+    var mxlen = num.length;
+    while(min.length&&max.length !== 0){
+        if(min[min.length-1]<max[max.length-1]){
+            num[mxlen-1]=(max[max.length-1]);
+            mxlen -= 1;
+            max.pop();
+        }else{
+            num[mxlen-1] = (min[min.length-1]);
+            mxlen -= 1;
+            min.pop();
+        }
+    }
+    
+    if(min.length !== 0) {for(var i=0;i<min.length;i++){num[i] = min[i]}};
+    if(max.length !== 0) {for(var i=0;i<max.length;i++){num[i] = max[i]}};
+   
+    num.reverse();
+    var len = num.length;
+    var ans;
+    if(len/2 === parseInt(len/2)){
+        ans = (num[len/2] + num[len/2-1])/2;
+    }else{
+        var numans = Math.floor(len/2);
+        ans = num[numans];
+    }
+    return ans;
+};

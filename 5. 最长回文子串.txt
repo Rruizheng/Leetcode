@@ -1,0 +1,71 @@
+var longestPalindrome = function(s) { 
+    function ishui(a){
+        var b = [];
+        for(var i=0;i<a.length;i++){
+            b[i] = a[i];
+        }
+        a.reverse();
+       for(var i=0;i<a.length;i++){
+           if(a[i] !== b[i]){
+               return false;
+           }
+       }
+        return true;
+    }
+    
+    var ans='';
+    var res='';
+    for(var i=0;i<s.length;i++){
+        for(var j=i+1;j<s.length+1;j++){
+            res = s.slice(i,j);
+            var huiarr = res.split('');
+            if(ishui(huiarr)){
+                (res.length > ans.length) &&(ans = res);
+            }
+        }
+    }
+    console.log(ans);
+};
+
+
+
+//¶¯Ì¬¹æ»®
+var longestPalindrome = function(s) {
+    var longstr = '';
+    var longest = 0;
+    var table=[];
+    table.length = s.length;
+    for(var i=0;i<table.length;i++){
+        table[i]=new Array();
+        table[i].length = s.length;
+    }
+    
+    for(var i=0;i<s.length;i++){
+        table[i][i] = true;
+        longstr = s.slice(i,i+1);
+        longest = 1;
+    }
+    for(var i=0;i<s.length;i++){
+        if(s.charAt(i) === s.charAt(i+1)){
+            table[i][i+1] = true;
+            longstr = s.slice(i,i+2);
+            longest = 2;
+        }else{
+            table[i][i+1] = false;
+        }
+    }
+    for(var len=3;len<=s.length;len++){
+        for(var i=0,j;(j=i+len-1)<s.length;i++){
+            if(s.charAt(i)===s.charAt(j)){
+                table[i][j]=table[i+1][j-1];
+                if(table[i][j] && (longest<len)){
+                    longstr = s.slice(i,j+1);
+                    longest = len;
+                }   
+            }else{
+                table[i][j] = false;
+            }
+        }
+    }
+    return longstr;
+};

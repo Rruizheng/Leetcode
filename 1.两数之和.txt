@@ -1,0 +1,22 @@
+var twoSum = function(nums, target) {
+    var num1,num2;
+    for(var i=0;i<nums.length;i++){
+        for(var j=0;j<nums.length;j++){
+            if(j!==i){
+                if(nums[j] + nums[i] === target){
+                    num1 = i;
+                    num2 = j;
+                    break;
+                }
+            }
+        }
+    }
+    
+    if(num1>num2){
+        var a = num1;
+        num1 = num2;
+        num2 = a;
+    }
+    
+    return [num1,num2];
+};

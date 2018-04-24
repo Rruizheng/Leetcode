@@ -1,0 +1,28 @@
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function(s) {
+    var onlyVab = function(ch,s1){
+        if(s1.indexOf(ch) !== -1){
+            return false;
+        }
+        return true;
+    }
+    
+    
+    var ans = '';
+    for(var i=0;i<s.length;i++){
+        var res='';
+        for(var j=i;j<s.length;j++){
+            var ch = s.charAt(j);
+            if(onlyVab(ch,res)){
+                res = res + ch;
+            }else{
+               break;
+            }
+        }
+        ans = (res.length>ans.length) ? res : ans;
+    } 
+    return ans.length;
+};
